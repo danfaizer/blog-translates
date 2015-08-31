@@ -86,4 +86,3 @@ https://languagecloud.sdl.com/translation-toolkit/api-documentation
 
 Google Translator API has no free tier.
 
-
