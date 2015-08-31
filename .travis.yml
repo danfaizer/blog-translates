@@ -7,7 +7,4 @@ before_install:
 after_success:
 - chmod 600 cert.pem
 - rsync  -a  -arvce "ssh -i cert.pem -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no " .  packer@52.19.153.94:/tmp/${TRAVIS_BUILD_ID}
-- ssh -t -t -i cert.pem -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no packer@52.19.153.94  "( cd /tmp/${TRAVIS_BUILD_ID} ; \
-	tar --exclude "./.git*" --exclude "./packer" --exclude "./Gemfile.lock" -zcf translates.tar.gz; \
-	mv translates.tar.gz packer/files/opt/translates.tar.gz; \
-	bash packer/build.sh )"
+- ssh -t -t -i cert.pem -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no packer@52.19.153.94  "( cd /tmp/${TRAVIS_BUILD_ID} ; tar --exclude './.git*' --exclude './packer' --exclude './Gemfile.lock' -zcf translates.tar.gz; mv translates.tar.gz packer/files/opt/translates.tar.gz; bash packer/build.sh )"
