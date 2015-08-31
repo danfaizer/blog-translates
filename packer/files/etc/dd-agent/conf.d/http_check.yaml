@@ -1,0 +1,13 @@
+init_config:
+
+instances:
+  - name: translates_http
+    url: http://localhost:3000/Status
+    timeout: 3
+    window: 5
+    threshold: 3
+    collect_response_time: true
+
+    tags:
+        - translates
+        - microservices

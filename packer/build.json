@@ -1,0 +1,64 @@
+{
+  "variables":{
+      "aws_account_id":"200661685204",
+      "aws_access_key":"",
+      "aws_secret_key":"",
+      "datadog_api_key":"",
+      "basename":"translates",
+      "ec2_region":"eu-west-1",
+      "ec2_instance_type":"t2.micro",
+      "ec2_source_ami":"ami-be2970c9",
+      "ec2_ssh_username":"ec2-user",
+      "creation_time": "{{env `creation_time`}}",
+      "appversion": "{{env `appversion`}}",
+      "creator": "{{env `creator`}}",
+      "ec2_ssh_timeout":"10m"
+   },
+   "builders":[
+      {
+         "type":"amazon-ebs",
+         "access_key":"{{user `aws_access_key`}}",
+         "secret_key":"{{user `aws_secret_key`}}",
+         "region":"{{user `ec2_region`}}",
+         "source_ami":"{{user `ec2_source_ami`}}",
+         "instance_type":"{{user `ec2_instance_type`}}",
+         "ssh_username":"{{user `ec2_ssh_username`}}",
+         "ssh_timeout":"{{user `ec2_ssh_timeout`}}",
+         "ami_users":[
+          "469919918414" ,
+          "043579549667" ,
+          "720989247736" ,
+          "687577343946"
+     ],
+      "ami_name": "{{user `basename`}}-{{ isotime \"20060102150405\"}}",
+      "name": "{{user `basename` }}-{{ isotime \"20060102150405\"}}",
+      "tags": {
+        "Name": "{{user `basename`}}-{{user `appversion`}}-{{ isotime \"20060102150405\"}}",
+        "appversion": "{{user `appversion`}}",
+        "base_ami_version": "{{user `ec2_source_ami`}}",
+        "creation_time":  "{{user `creation_time`}}",
+        "creator": "{{user `creator`}}"
+      }
+  }],
+  "provisioners": [
+      {
+         "type":"file",
+         "source":"packer/files",
+         "destination":"/tmp"
+      },
+      {
+         "inline":[
+            "sudo cp -R /tmp/files/* /; sudo cp /tmp/files/translates /etc/init.d/; sudo rm -rf /tmp/files /translates"
+         ],
+         "type":"shell"
+      },
+      {
+         "type": "shell",
+         "script": "packer/install.sh",
+         "environment_vars" : [
+            "DD_API_KEY={{user `datadog_api_key`}}",
+            "DD_INSTALL_ONLY=True"
+         ]
+      }
+  ]
+}
