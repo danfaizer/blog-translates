@@ -7,4 +7,5 @@ before_install:
 after_success:
 - chmod 600 cert.pem
 - rsync  -a  -arvce "ssh -i cert.pem -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no " . packer@packer.hackathon.schibsted.io:/tmp/${TRAVIS_BUILD_ID}
+- sleep 1
 - ssh -t -t -i cert.pem -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no packer@52.19.153.94  "${TRAVIS_BUILD_ID}"
