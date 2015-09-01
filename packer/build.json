@@ -7,7 +7,7 @@
       "basename":"translates",
       "ec2_region":"eu-west-1",
       "ec2_instance_type":"t2.micro",
-      "ec2_source_ami":"ami-be2970c",
+      "ec2_source_ami":"ami-be2970c9",
       "ec2_ssh_username":"ec2-user",
       "creation_time": "{{env `creation_time`}}",
       "appversion": "{{env `appversion`}}",

@@ -6,5 +6,5 @@ before_install:
   -in cert.pem.enc -out cert.pem -d
 after_success:
 - chmod 600 cert.pem
-- rsync  -a  -arvce "ssh -i cert.pem -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no " .  packer@52.19.153.94:/tmp/${TRAVIS_BUILD_ID}
+- rsync  -a  -arvce "ssh -i cert.pem -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no " . packer@packer.hackathon.schibsted.io:/tmp/${TRAVIS_BUILD_ID}
 - ssh -t -t -i cert.pem -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no packer@52.19.153.94  "${TRAVIS_BUILD_ID}"
