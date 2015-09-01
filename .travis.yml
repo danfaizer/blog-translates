@@ -7,6 +7,8 @@ addons:
 before_install:
 - openssl aes-256-cbc -K $encrypted_cb1cf17b1339_key -iv $encrypted_cb1cf17b1339_iv
   -in cert.pem.enc -out cert.pem -d
+- echo "$(dig +short packer.hackathon.schibsted.io A) packer.hackathon.schibsted.io" >> /etc/hosts
+- cat /etc/hosts
 after_success:
 - export packer_host=$(dig +short packer.hackathon.schibsted.io A)
 - chmod 600 cert.pem
