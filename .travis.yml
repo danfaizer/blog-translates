@@ -8,7 +8,7 @@ addons:
 before_install:
 - openssl aes-256-cbc -K $encrypted_cb1cf17b1339_key -iv $encrypted_cb1cf17b1339_iv
   -in cert.pem.enc -out cert.pem -d
-- cat /etc/issue
+- sudo apt-get install nslookup
 - sudo echo "$(nslookup packer.hackathon.schibsted.io  | grep -A10 answer | grep Address | cut -d ' ' -f2 | head -1) packer.hackathon.schibsted.io" >> /etc/hosts
 - cat /etc/hosts
 after_success:
