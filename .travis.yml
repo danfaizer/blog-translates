@@ -12,10 +12,10 @@ after_success:
 # - chmod 600 cert.pem
 # - rsync -a -arvce "ssh -i cert.pem -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no " . packer@$packer_host:/tmp/${TRAVIS_BUILD_ID}
 # - ssh -t -t -i cert.pem -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no packer@$packer_host "${TRAVIS_BUILD_ID}"
-- sudo apt-get update
-- sudo apt-get install dnsutils --assume-yes
-- export packer_host=$(nslookup packer.hackathon.schibsted.io | grep -A10 answer | grep Address | cut -d ' ' -f2 | head -1)
-- echo $packer_host
+# - sudo apt-get update
+# - sudo apt-get install dnsutils --assume-yes
+# - export packer_host=$(nslookup packer.hackathon.schibsted.io | grep -A10 answer | grep Address | cut -d ' ' -f2 | head -1)
+# - echo $packer_host
 - chmod 600 cert.pem
-- rsync -a -arvce "ssh -i cert.pem -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no " . packer@$packer.hackathon.schibsted.io:/tmp/${TRAVIS_BUILD_ID}
-- ssh -t -t -i cert.pem -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no packer@$packer.hackathon.schibsted.io "${TRAVIS_BUILD_ID}"
+- rsync -a -arvce "ssh -i cert.pem -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no " . packer@packer.hackathon.schibsted.io:/tmp/${TRAVIS_BUILD_ID}
+- ssh -t -t -i cert.pem -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no packer@packer.hackathon.schibsted.io "${TRAVIS_BUILD_ID}"
